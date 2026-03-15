@@ -1,0 +1,43 @@
+# Environment & secrets
+.env
+
+# Material data (proprietary/measured data, not for distribution)
+material/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Generated outputs
+*.png
+*.jpg
+*.jpeg
+*.gif
+data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
