@@ -5,7 +5,6 @@ This module provides functions for calculating mode overlap between waveguide mo
 and Gaussian beams using Tidy3D's mode solver. It supports various waveguide geometries
 and beam profiles for fiber-to-chip coupling analysis.
 
-Author: Dr. Tong
 Date: 2025-01-27
 """
 

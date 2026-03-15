@@ -334,6 +334,6 @@ if __name__ == "__main__":
     print("Examples Complete!")
     print("=" * 60)
     print("\nTo run actual simulations:")
-    print("1. Replace API_KEY with your Tidy3D key")
+    print("1. Set TIDY3D_API_KEY in .env file")
     print("2. Uncomment the simulation code in example_complete_analysis()")
     print("3. Run: python example_mode_overlap_analysis.py")

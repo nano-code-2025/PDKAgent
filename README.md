@@ -58,6 +58,8 @@ cd PICbot
 
 ### 2. Create virtual environment & install dependencies
 
+Requires **Python 3.10 - 3.13** (tidy3d does not yet support Python 3.14+).
+
 ```bash
 python -m venv venv
 
