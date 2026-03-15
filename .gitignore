@@ -22,8 +22,10 @@ env/
 .ipynb_checkpoints/
 *.ipynb
 
-# Generated outputs
+# Generated outputs (results_exp/ is tracked for demo)
+results/
 *.png
+!results_exp/*.png
 *.jpg
 *.jpeg
 *.gif

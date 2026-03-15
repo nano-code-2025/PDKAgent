@@ -2,11 +2,36 @@
 
 An open-source toolkit for automating repetitive PIC (Photonic Integrated Circuit) design tasks, starting with thin-film lithium tantalate (TFLT / LiTaO3) waveguides at 780 nm. Built on top of [Tidy3D](https://www.flexcompute.com/tidy3d/) electromagnetic solver.
 
+> **Note:** This repository contains a **partial, open-source version** of the full PICbot platform. Proprietary material data, internal design libraries, and certain advanced modules are not included. The code here demonstrates the core calculation workflow and can be adapted for your own material platform.
+
+## Example Results
+
+Below are sample outputs from the mode overlap analysis pipeline (see [`results_exp/analysis_report.md`](results_exp/analysis_report.md) for the full report):
+
+### Elliptical Gaussian Beam (1.40 x 6.70 um)
+
+<p align="center">
+  <img src="results_exp/gaussian_beam_1.40x6.70um.png" width="45%" />
+  <img src="results_exp/coupling_loss_1.40x6.70um.png" width="45%" />
+</p>
+
+| Metric | Value |
+|--------|-------|
+| Optimal slab width | 8.40 um |
+| Coupling loss | 2.35 dB |
+| Coupling efficiency | 58.3% |
+
+### Alignment Tolerance
+
+<p align="center">
+  <img src="results_exp/alignment_tolerance_1.40x6.70um.png" width="50%" />
+</p>
+
 ## Motivation
 
 PIC design involves many standardized but time-consuming calculations: single-mode width sweeps, mode overlap with fibers/SOAs/BOAs, component optimization, and PDK generation. **PICbot** aims to automate this entire workflow so designers can focus on system architecture and creative design, not repetitive simulations.
 
-When switching material platforms (e.g., Si → SiN → TFLN), only the material parameters need to change — the entire calculation pipeline runs automatically.
+When switching material platforms (e.g., Si -> SiN -> TFLN), only the material parameters need to change -- the entire calculation pipeline runs automatically.
 
 ## Project Status
 
@@ -24,7 +49,7 @@ When switching material platforms (e.g., Si → SiN → TFLN), only the material
 | | Mode overlap integral calculation | Done | `mode_overlap_calculator.py` |
 | | Coupling efficiency vs waveguide width scan | Done | `mode_overlap_calculator.py` |
 | | Alignment tolerance 2D map | Done | `mode_overlap_calculator.py` |
-| | Visualization (mode field, beam, coupling curves) | Done | `mode_overlap_calculator.py` |
+| | Visualization & auto-report generation | Done | `run_elliptical_beam_analysis_v2_0127.py` |
 
 ### Planned
 
@@ -34,7 +59,6 @@ When switching material platforms (e.g., Si → SiN → TFLN), only the material
 | | AI-assisted design point recommendation (critical width + 10-30% margin) | High |
 | | Waveguide spacing from 1e-7 intensity boundary | High |
 | | Bend radius optimization (loss vs radius sweep) | High |
-| | Output as structured Markdown report | Medium |
 | **3. Components** | Directional coupler design & optimization | Medium |
 | | Micro-ring resonator | Medium |
 | | MMI (multimode interference) splitter | Medium |
@@ -52,8 +76,8 @@ When switching material platforms (e.g., Si → SiN → TFLN), only the material
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/PICbot.git
-cd PICbot
+git clone https://github.com/nano-code-2025/PDKAgent.git
+cd PDKAgent
 ```
 
 ### 2. Create virtual environment & install dependencies
@@ -129,8 +153,10 @@ PICbot/
 ├── mode_overlap_calculator.py   # Core calculator: mode solver, overlap, scans
 ├── func.py                      # Material dispersion models (LiTaO3, SiO2, SiN)
 ├── example_mode_overlap_analysis.py  # Usage examples
-├── run_elliptical_beam_analysis_v2_0127.py  # Practical analysis script
-├── material/                    # Material CSV data (not tracked in git)
+├── run_elliptical_beam_analysis_v2_0127.py  # Practical analysis script + report
+├── results_exp/                 # Example output (report + figures)
+├── doc/                         # Design workflow documentation
+├── material/                    # Material CSV data (not tracked)
 ├── requirements.txt
 ├── .env.example                 # API key template
 └── README.md
@@ -142,28 +168,28 @@ The full PIC design automation workflow follows four phases:
 
 ```
 Phase 1: Material & Process       Phase 2: Waveguide Design
-┌─────────────────────┐           ┌──────────────────────────┐
-│ Material index (CSV) │──────────▶│ Single-mode width sweep  │
-│ Process parameters   │           │ Mode area analysis       │
-│ Working wavelength   │           │ WG spacing (1e-7 bound.) │
-└─────────────────────┘           │ Bend radius optimization │
-                                  └────────────┬─────────────┘
-                                               │
-Phase 3: Components                            ▼
-┌──────────────────────────┐      ┌──────────────────────────┐
-│ Mode overlap (fiber/SOA) │◀─────│ Design parameters        │
-│ Coupler, Ring, MMI       │      └──────────────────────────┘
-│ Crossing, Splitter       │
-│ Phase shifter, Modulator │
-└────────────┬─────────────┘
-             │
-Phase 4: PDK & Layout             ▼
-┌──────────────────────────┐
-│ Component compiler       │
-│ PDK code generation      │
-│ Test structure layout    │
-│ GDSII export             │
-└──────────────────────────┘
++---------------------+           +--------------------------+
+| Material index (CSV) |--------->| Single-mode width sweep  |
+| Process parameters   |          | Mode area analysis       |
+| Working wavelength   |          | WG spacing (1e-7 bound.) |
++---------------------+          | Bend radius optimization |
+                                  +------------+-------------+
+                                               |
+Phase 3: Components                            v
++--------------------------+      +--------------------------+
+| Mode overlap (fiber/SOA) |<-----| Design parameters        |
+| Coupler, Ring, MMI       |      +--------------------------+
+| Crossing, Splitter       |
+| Phase shifter, Modulator |
++------------+-------------+
+             |
+Phase 4: PDK & Layout             v
++--------------------------+
+| Component compiler       |
+| PDK code generation      |
+| Test structure layout    |
+| GDSII export             |
++--------------------------+
 ```
 
 ## Default Platform Parameters
@@ -176,6 +202,10 @@ Phase 4: PDK & Layout             ▼
 | Etch angle | 20 deg |
 | Cladding | SiO2 |
 | Wavelength | 780 nm |
+
+## Disclaimer
+
+This is a **partial open-source release** for demonstration purposes. The full platform includes additional proprietary modules (advanced component libraries, internal PDK generators, and measured material databases) that are not published here. The open-source portion is sufficient to reproduce the core mode overlap workflow and can be extended for other material platforms.
 
 ## Contributing
 
