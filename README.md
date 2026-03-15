@@ -4,6 +4,12 @@ An open-source toolkit for automating repetitive PIC (Photonic Integrated Circui
 
 > **Note:** This repository contains a **partial, open-source version** of the full PICbot platform. Proprietary material data, internal design libraries, and certain advanced modules are not included. The code here demonstrates the core calculation workflow and can be adapted for your own material platform.
 
+## Motivation
+
+PIC design involves many standardized but time-consuming calculations: single-mode width sweeps, mode overlap with fibers/SOAs/BOAs, component optimization, and PDK generation. **PICbot** aims to automate this entire workflow so designers can focus on system architecture and creative design, not repetitive simulations.
+
+When switching material platforms (e.g., Si -> SiN -> TFLN), only the material parameters need to change -- the entire calculation pipeline runs automatically.
+
 ## Example Results
 
 ### Example 1: Slab Waveguide — Elliptical Beam (1.40 x 6.70 um)
@@ -38,12 +44,6 @@ Ridge waveguide (300 nm ridge + 120 nm slab) compared across 5 beam profiles. Se
 | 1x2um elliptical | 2.50 um | 1.25 | 75.0% |
 | 1.5x2.5um elliptical | 3.50 um | 2.65 | 54.4% |
 | 2um circular | 2.50 um | 3.76 | 42.1% |
-
-## Motivation
-
-PIC design involves many standardized but time-consuming calculations: single-mode width sweeps, mode overlap with fibers/SOAs/BOAs, component optimization, and PDK generation. **PICbot** aims to automate this entire workflow so designers can focus on system architecture and creative design, not repetitive simulations.
-
-When switching material platforms (e.g., Si -> SiN -> TFLN), only the material parameters need to change -- the entire calculation pipeline runs automatically.
 
 ## Project Status
 
