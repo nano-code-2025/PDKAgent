@@ -21,7 +21,7 @@
 
 ## 2. Gaussian Beam Profile
 
-![Gaussian Beam](gaussian_beam_1.40x6.70um.png)
+![Gaussian Beam](beam_profile.png)
 
 ## 3. Coupling Results
 
@@ -48,14 +48,14 @@
 | Coupling loss | 2.35 dB |
 | Coupling efficiency | 58.3% |
 
-![Coupling Loss vs Width](coupling_loss_1.40x6.70um.png)
+![Coupling Loss vs Width](coupling_loss.png)
 
 ## 4. Alignment Tolerance
 
-![Alignment Tolerance](alignment_tolerance_1.40x6.70um.png)
+![Alignment Tolerance](alignment_tolerance.png)
 
 ## Appendix: Waveguide Cross Sections
 
-![First width](waveguide_cross_section_6.20um.png)
+![First width](waveguide_w6.20um.png)
 
-![Last width](waveguide_cross_section_8.40um.png)
+![Last width](waveguide_w8.40um.png)

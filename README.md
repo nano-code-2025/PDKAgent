@@ -6,13 +6,13 @@ An open-source toolkit for automating repetitive PIC (Photonic Integrated Circui
 
 ## Example Results
 
-Below are sample outputs from the mode overlap analysis pipeline (see [`results_exp/analysis_report.md`](results_exp/analysis_report.md) for the full report):
+### Example 1: Slab Waveguide — Elliptical Beam (1.40 x 6.70 um)
 
-### Elliptical Gaussian Beam (1.40 x 6.70 um)
+Slab waveguide (120 nm) coupled to an elliptical Gaussian beam. See [`results_exp/slab_elliptical_beam/analysis_report.md`](results_exp/slab_elliptical_beam/analysis_report.md) for the full report.
 
 <p align="center">
-  <img src="results_exp/gaussian_beam_1.40x6.70um.png" width="45%" />
-  <img src="results_exp/coupling_loss_1.40x6.70um.png" width="45%" />
+  <img src="results_exp/slab_elliptical_beam/beam_profile.png" width="45%" />
+  <img src="results_exp/slab_elliptical_beam/coupling_loss.png" width="45%" />
 </p>
 
 | Metric | Value |
@@ -21,11 +21,23 @@ Below are sample outputs from the mode overlap analysis pipeline (see [`results_
 | Coupling loss | 2.35 dB |
 | Coupling efficiency | 58.3% |
 
-### Alignment Tolerance
+<p align="center">
+  <img src="results_exp/slab_elliptical_beam/alignment_tolerance.png" width="50%" />
+</p>
+
+### Example 2: Ridge Waveguide — Multi-Beam Comparison
+
+Ridge waveguide (300 nm ridge + 120 nm slab) compared across 5 beam profiles. See [`results_exp/ridge_multibeam/analysis_report.md`](results_exp/ridge_multibeam/analysis_report.md) for the full report.
 
 <p align="center">
-  <img src="results_exp/alignment_tolerance_1.40x6.70um.png" width="50%" />
+  <img src="results_exp/ridge_multibeam/coupling_loss.png" width="60%" />
 </p>
+
+| Beam | Optimal Width | Loss (dB) | Efficiency |
+|------|---------------|-----------|------------|
+| 1x2um elliptical | 2.50 um | 1.25 | 75.0% |
+| 1.5x2.5um elliptical | 3.50 um | 2.65 | 54.4% |
+| 2um circular | 2.50 um | 3.76 | 42.1% |
 
 ## Motivation
 
@@ -150,15 +162,18 @@ See `example_mode_overlap_analysis.py` for more examples.
 
 ```
 PICbot/
-├── mode_overlap_calculator.py   # Core calculator: mode solver, overlap, scans
-├── func.py                      # Material dispersion models (LiTaO3, SiO2, SiN)
+├── mode_overlap_calculator.py        # Core calculator: mode solver, overlap, scans
+├── func.py                           # Material dispersion models (LiTaO3, SiO2, SiN)
 ├── example_mode_overlap_analysis.py  # Usage examples
-├── run_elliptical_beam_analysis_v2_0127.py  # Practical analysis script + report
-├── results_exp/                 # Example output (report + figures)
-├── doc/                         # Design workflow documentation
-├── material/                    # Material CSV data (not tracked)
+├── run_elliptical_beam_analysis_v2_0127.py  # Slab waveguide analysis + report
+├── run_ridge_multibeam_analysis.py   # Ridge waveguide multi-beam analysis + report
+├── results_exp/                      # Example outputs
+│   ├── slab_elliptical_beam/         #   Slab waveguide coupling report
+│   └── ridge_multibeam/              #   Ridge waveguide multi-beam report
+├── doc/                              # Design workflow documentation
+├── material/                         # Material CSV data (not tracked)
 ├── requirements.txt
-├── .env.example                 # API key template
+├── .env.example                      # API key template
 └── README.md
 ```
 

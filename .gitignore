@@ -24,8 +24,9 @@ env/
 
 # Generated outputs (results_exp/ is tracked for demo)
 results/
+results_ridge/
 *.png
-!results_exp/*.png
+!results_exp/**/*.png
 *.jpg
 *.jpeg
 *.gif
